@@ -43,3 +43,6 @@ class Robot:
             return dim
         else:
             return None
+
+    def move(self):
+        pass

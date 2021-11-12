@@ -19,6 +19,7 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.y_dimension_table = 5
         self.test_table_one = Table("table one", self.x_dimension_table, self.y_dimension_table)
         self.robot.setTable(self.test_table_one)
+        self.robot.setFaceDirection(self.face_initial)
 
     def test_name(self):
         self.assertEqual(self.robot.getName(), self.robot_name)
@@ -28,7 +29,7 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.assertEqual(self.robot.getCurrentPosition(), (self.x_initial, self.y_initial))
 
     def test_face(self):
-        self.robot.setFaceDirection(self.face_initial)
+        
         self.assertEqual(self.robot.getCurrentFaceDirection(), self.face_initial)
 
     def test_set_table(self):
@@ -42,18 +43,33 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         """
         test the move function of the toy robot to see if it moves just one unit forward in the direction it is currently facing.
         """
+        (x_table_dim, y_table_dim) =  self.robot.getTableDimensions()
         x_current, y_current = self.robot.getCurrentPosition()
         face_current = self.robot.getCurrentFaceDirection()
         self.robot.move()
         x_after_move , y_after_move = self.robot.getCurrentPosition()
         if face_current==Face.NORTH:
-            self.assertEqual((x_after_move , y_after_move), (x_current, y_current+1))
+            if y_current == y_table_dim:
+                self.assertEqual((x_after_move , y_after_move), (x_current, y_current))     #skip move
+            else:
+                self.assertEqual((x_after_move , y_after_move), (x_current, y_current+1))
         elif face_current==Face.SOUTH:
-            self.assertEqual((x_after_move , y_after_move), (x_current, y_current-1))
+            if y_current == 0:
+                self.assertEqual((x_after_move , y_after_move), (x_current, y_current))     #skip move
+            else:
+                self.assertEqual((x_after_move , y_after_move), (x_current, y_current-1))
         elif face_current==Face.EAST:
-            self.assertEqual((x_after_move , y_after_move), (x_current+1, y_current))
+            if x_current == x_table_dim:
+                self.assertEqual((x_after_move , y_after_move), (x_current, y_current))     #skip move
+            else:
+                self.assertEqual((x_after_move , y_after_move), (x_current+1, y_current))
         elif face_current==Face.WEST:
-            self.assertEqual((x_after_move , y_after_move), (x_current-1, y_current))
+            if x_current == 0:
+                self.assertEqual((x_after_move , y_after_move), (x_current, y_current))     #skip move
+            else:
+                self.assertEqual((x_after_move , y_after_move), (x_current-1, y_current))
+        else:
+            raise ValueError("the given face direction is not a valid value from Face enum")
         # TODO : check agianst the table dimension to see if the robot does not fall off of the table with regard to the table dimensions
 
         
