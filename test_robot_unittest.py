@@ -15,9 +15,9 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.x_initial, self.y_initial = 0,0
         self.face_initial = Face.EAST
         # fabricate a table of dimensions 5 units x 5 units and pass it to the robot
-        x_dimension = 5
-        y_dimension = 5
-        self.test_table_one = Table("table one", x_dimension, y_dimension)
+        self.x_dimension_table = 5
+        self.y_dimension_table = 5
+        self.test_table_one = Table("table one", self.x_dimension_table, self.y_dimension_table)
         self.robot.setTable(self.test_table_one)
 
     def test_name(self):
@@ -36,7 +36,7 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
 
     def test_get_table_dimensions(self):
         (x,y) = self.robot.getTableDimensions()
-        self.assertEqual((x,y), (x_dimension, y_dimension))
+        self.assertEqual((x,y), (self.x_dimension_table, self.y_dimension_table))
 
 
 
