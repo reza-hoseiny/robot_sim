@@ -86,6 +86,18 @@ class Robot:
         elif face_current == Face.WEST:
             self.face_direction = Face.NORTH
 
-
+    def right(self):
+        """
+        RIGHT command forces the robot to rotate 90 degrees in the right direction without changing the position of the robot
+        """
+        face_current = self.getCurrentFaceDirection()
+        if face_current == Face.NORTH:
+            self.face_direction = Face.WEST
+        elif face_current == Face.SOUTH:
+            self.face_direction = Face.EAST
+        elif face_current == Face.EAST:
+            self.face_direction = Face.NORTH
+        elif face_current == Face.WEST:
+            self.face_direction = Face.SOUTH
 
 
