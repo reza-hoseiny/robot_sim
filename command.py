@@ -22,11 +22,14 @@ class PlaceCommand(Command):
         self.y_max = y_max
     
     def is_valid(self):
-        if (self.x_position > self.x_max) or (self.x_position<self.x_min):
+        if (self.x_position is None) or (self.y_position is None):
             return False
-        if (self.y_position > self.y_max) or (self.y_position<self.y_min):
-            return False
-        return True
+        elif (self.x_position is not None) and (self.y_position is not None):
+            if (self.x_position > self.x_max) or (self.x_position<self.x_min):
+                return False
+            if (self.y_position > self.y_max) or (self.y_position<self.y_min):
+                return False
+            return True
 
 class MoveCommand(Command):
     def __init__(self):

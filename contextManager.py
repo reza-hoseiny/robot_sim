@@ -29,8 +29,22 @@ class ContextManager():
                 command = RightCommand()
             if line.startswith("REPORT"):
                 command = ReportCommand()
-                
-                
+            if line.startswith("PLACE"):
+                # we need to find out what is x,y,f?
+                second_part = line.split(" ")[1]
+                params = second_part.split(",")
+                x_init = int(params[0])
+                y_init = int(params[1])
+                face_direction_str = params[2]                
+                if face_direction_str.upper() == "NORTH":
+                    face_direction = Face.NORTH
+                elif face_direction_str.upper() == "SOUTH":
+                    face_direction = Face.SOUTH
+                elif face_direction_str.upper() == "WEST":
+                    face_direction = Face.WEST
+                elif face_direction_str.upper() == "EAST":
+                    face_direction = Face.EAST
+                command = PlaceCommand(x_init,y_init,face_direction)
         if not valid_command:
             return None
         return command
@@ -85,5 +99,6 @@ class ContextManager():
 
                 
                 
+
 
 
