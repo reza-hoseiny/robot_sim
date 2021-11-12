@@ -13,7 +13,7 @@ class Robot:
         return self.name
 
     def setPosition(self, x, y):
-        x_table_dim, y_table_dim = self.table.getDimensions()
+        x_table_dim, y_table_dim = self.getTableDimensions() #instead of self.table.getDimensions()
         if x_table_dim is not None:
             if x>=0 and x <= x_table_dim:
                 self.current_x = x
@@ -23,8 +23,6 @@ class Robot:
 
     def getCurrentPosition(self):
         return (self.current_x, self.current_y)
-        pass
-
 
     def setFaceDirection(self, face_direction):
         if face_direction in Face.__members__.values():
@@ -54,7 +52,7 @@ class Robot:
         face_current = self.getCurrentFaceDirection()
         (x_table_dim, y_table_dim) =  self.getTableDimensions()
         if face_current==Face.NORTH:
-            if y_current < y_table_dim:
+            if y_current < y_table_dim-1:
                 self.current_y += 1
             #otherwise ignore the move command
         elif face_current==Face.SOUTH:
@@ -62,7 +60,7 @@ class Robot:
                 self.current_y -= 1
             #otherwise ignore the move command
         elif face_current==Face.EAST:
-            if x_current < x_table_dim:
+            if x_current < x_table_dim-1:
                 self.current_x += 1
             #otherwise ignore the move command
         elif face_current==Face.WEST:

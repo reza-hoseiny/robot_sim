@@ -174,7 +174,6 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         x_report, y_report, face_report = self.robot.report()
         self.assertEqual((3, 3, Face.NORTH), (x_report, y_report, face_report))
 
-
     def test_edge_case_table(self):
         """
         edge case input for table x&y dimension:
@@ -229,15 +228,59 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((None,0),(x_current , y_current))
 
-        
-
         self.robot = Robot('Fifth robot')   #check if position of robot is more than the table size
         self.robot.setTable(t)        
         self.robot.setPosition(6, 6)        
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((None,None),(x_current , y_current))
 
-
+    def test_case_four(self):
+        """
+        a complex test case for the following command series:
+        PLACE 1,2,EAST
+        MOVE
+        MOVE
+        LEFT
+        MOVE    (3,3)
+        MOVE    (3,4)
+        MOVE    (3,4)
+        MOVE    (3,4)
+        MOVE    (3,4)
+        LEFT
+        MOVE    (2,4)
+        MOVE    (1,4)
+        MOVE    (0,4)
+        MOVE    (0,4)
+        MOVE    (0,4)
+        LEFT
+        MOVE    (0,3)
+        MOVE    (0,2)
+        MOVE    (0,1)       
+        REPORT
+        the expected Output is 0,1,SOUTH
+        """
+        self.robot.setPosition(1,2)
+        self.robot.setFaceDirection(Face.EAST)
+        self.robot.move()
+        self.robot.move()
+        self.robot.left()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.left()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.left()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()        
+        x_report, y_report, face_report = self.robot.report()
+        self.assertEqual((0, 1, Face.SOUTH), (x_report, y_report, face_report))
 
 if __name__ == '__main__':
     unittest.main()
