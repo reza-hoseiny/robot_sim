@@ -343,7 +343,6 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
 class TestCommandMethods(unittest.TestCase):  #the test class to check the validaity of input commands
     def setUp(self):
         pass
-        
     
     def test_command_type_place(self):
         self.command = PlaceCommand(0,0,Face.EAST)
@@ -394,6 +393,16 @@ class TestCommandMethods(unittest.TestCase):  #the test class to check the valid
         self.command = RerportCommand()
         ctype = self.command.getCommandType()
         self.assertEqual(ctype, CommandType.REPORT)
+
+class TestContextMethods(unittest.TestCase):  #the test class to check the validaity of input commands
+    def setUp(self):        
+        self.contextManager = ContextManager(Table("a Table", 5, 5), Robot("a Robot"))
+        t = self.contextManager.getTable()
+        r = self.contextManager.getRobot()
+        self.assertEqual(r.getTable(), t)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
