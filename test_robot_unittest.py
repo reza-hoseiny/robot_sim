@@ -13,23 +13,24 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.robot_name = 'The first robot'
         self.robot = Robot(self.robot_name)
         self.x_initial, self.y_initial = 0,0
+        self.robot.setPosition(self.x_initial, self.y_initial)
         self.face_initial = Face.EAST
+        self.robot.setFaceDirection(self.face_initial)
         # fabricate a table of dimensions 5 units x 5 units and pass it to the robot
         self.x_dimension_table = 5
         self.y_dimension_table = 5
         self.test_table_one = Table("table one", self.x_dimension_table, self.y_dimension_table)
         self.robot.setTable(self.test_table_one)
-        self.robot.setFaceDirection(self.face_initial)
+        
 
     def test_name(self):
         self.assertEqual(self.robot.getName(), self.robot_name)
     
     def test_position(self):
-        self.robot.setPosition(self.x_initial, self.y_initial)
+
         self.assertEqual(self.robot.getCurrentPosition(), (self.x_initial, self.y_initial))
 
     def test_face(self):
-        
         self.assertEqual(self.robot.getCurrentFaceDirection(), self.face_initial)
 
     def test_set_table(self):
@@ -69,8 +70,8 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
             else:
                 self.assertEqual((x_after_move , y_after_move), (x_current-1, y_current))
         else:
-            raise ValueError("the given face direction is not a valid value from Face enum")
-        # TODO : check agianst the table dimension to see if the robot does not fall off of the table with regard to the table dimensions
+            self.assertRaises(ValueError, None) # the code must raise ValueError("the given face direction is not a valid value from Face enum")
+        
 
         
 

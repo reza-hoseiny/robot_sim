@@ -45,4 +45,26 @@ class Robot:
             return None
 
     def move(self):
-        pass
+        x_current, y_current = self.getCurrentPosition()
+        face_current = self.getCurrentFaceDirection()
+        (x_table_dim, y_table_dim) =  self.getTableDimensions()
+        # print(x_current, y_current, face_current, x_`table_dim, y_table_dim)
+        if face_current==Face.NORTH:
+            if y_current < y_table_dim:
+                self.current_y += 1
+        elif face_current==Face.SOUTH:
+            if y_current > 0 :
+                self.current_y -= 1
+        elif face_current==Face.EAST:
+            if x_current < x_table_dim:
+                self.current_x += 1
+        elif face_current==Face.WEST:
+            if x_current > 0:
+                self.current_x -= 1
+        else:
+            raise ValueError("the given face direction is not a valid value from Face enum")
+        
+
+
+
+
