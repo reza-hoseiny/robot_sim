@@ -5,6 +5,7 @@ from face import Face
 from table import Table
 from command import *
 from commandType import CommandType
+from contextManager import ContextManager
 
 class TestRobotMethods(unittest.TestCase):  #every test class must inherit from the TestCase class
     """
@@ -397,12 +398,11 @@ class TestCommandMethods(unittest.TestCase):  #the test class to check the valid
 class TestContextMethods(unittest.TestCase):  #the test class to check the validaity of input commands
     def setUp(self):        
         self.contextManager = ContextManager(Table("a Table", 5, 5), Robot("a Robot"))
+        
+    def test_table_is_assigned_robot(self):
         t = self.contextManager.getTable()
         r = self.contextManager.getRobot()
         self.assertEqual(r.getTable(), t)
-
-
-
 
 if __name__ == '__main__':
     unittest.main()
