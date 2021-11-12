@@ -404,11 +404,30 @@ class TestContextMethods(unittest.TestCase):  #the test class to check the valid
         r = self.contextManager.getRobot()
         self.assertEqual(r.getTable(), t)
 
-    def test_issue_command(self):
+    def test_issue_valid_place_command(self):
         self.contextManager.issue(PlaceCommand(2,4,Face.EAST))
         r = self.contextManager.getRobot()
         self.assertEqual(r.getCurrentPosition(), (2,4))
 
+    def test_issue_invalid_place_command(self):
+        self.contextManager.issue(PlaceCommand(6,4,Face.EAST))
+        r = self.contextManager.getRobot()
+        self.assertEqual(r.getCurrentPosition(), (None, None))  #not (6,4)
+
+        self.contextManager.issue(PlaceCommand(4,8,Face.EAST))
+        r = self.contextManager.getRobot()
+        self.assertEqual(r.getCurrentPosition(), (None, None))  #not (4,8)
+
+
+        self.contextManager.issue(PlaceCommand(-4,-8,Face.EAST))
+        r = self.contextManager.getRobot()
+        self.assertEqual(r.getCurrentPosition(), (None, None))  #not (-4,-8)
+
+        self.contextManager.issue(PlaceCommand(+4,-4,Face.EAST))
+        r = self.contextManager.getRobot()
+        self.assertEqual(r.getCurrentPosition(), (None, None))  #not +4,-4
+
+    
 if __name__ == '__main__':
     unittest.main()
 
