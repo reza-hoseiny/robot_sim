@@ -484,9 +484,20 @@ class TestContextMethods(unittest.TestCase):  #the test class to check the valid
         result = self.contextManager.issue(RerportCommand())
         self.assertEqual((3, 0,Face.SOUTH), result)
 
-
+    def test_issue_right_after_invalid_place_command(self):
+        self.contextManager.issue(PlaceCommand(-4,-8,Face.EAST))
+        result = self.contextManager.issue(RerportCommand())        
+        self.assertEqual((None, None,None), result)
+        self.contextManager.issue(MoveCommand())
+        result = self.contextManager.issue(RerportCommand())        
+        self.assertEqual((None, None,None), result)      
+        self.contextManager.issue(RightCommand())  
+        result = self.contextManager.issue(RerportCommand())        
+        self.assertEqual((None, None,None), result)
+        self.contextManager.issue(LeftCommand())        
+        result = self.contextManager.issue(RerportCommand())        
+        self.assertEqual((None, None,None), result)      
         
-
 if __name__ == '__main__':
     unittest.main()
 

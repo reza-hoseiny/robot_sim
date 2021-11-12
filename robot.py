@@ -45,10 +45,21 @@ class Robot:
         else:
             return None
 
+    def is_not_on_table(self):
+        x_current, y_current = self.getCurrentPosition()
+        face_current = self.getCurrentFaceDirection()
+        if (x_current is None) or (y_current is None) or (face_current is None):
+            return True
+        else:
+            return False
+
     def move(self):
         x_current, y_current = self.getCurrentPosition()
         face_current = self.getCurrentFaceDirection()
         (x_table_dim, y_table_dim) =  self.getTableDimensions()
+        
+        if self.is_not_on_table():
+            return #A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
         if face_current==Face.NORTH:
             if y_current < y_table_dim-1:
                 self.current_y += 1
@@ -77,6 +88,8 @@ class Robot:
         """
         LEFT command forces the robot to rotate 90 degrees in the left direction without changing the position of the robot
         """
+        if self.is_not_on_table():
+            return #A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
         face_current = self.getCurrentFaceDirection()
         if face_current == Face.NORTH:
             self.face_direction = Face.WEST
@@ -91,6 +104,9 @@ class Robot:
         """
         RIGHT command forces the robot to rotate 90 degrees in the right direction without changing the position of the robot
         """
+        if self.is_not_on_table():
+            return #A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
+
         face_current = self.getCurrentFaceDirection()
         if face_current == Face.NORTH:
             self.face_direction = Face.EAST
