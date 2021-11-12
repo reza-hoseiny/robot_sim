@@ -1,5 +1,5 @@
 class Table():
-    def __init__(self, name="simple table", x_dimension=10, y_dimension=10):
+    def __init__(self, name="simple table", x_dimension=5, y_dimension=5):
         self.name = name
         if (x_dimension>0) and (y_dimension>0):
             self.x_dimension = x_dimension

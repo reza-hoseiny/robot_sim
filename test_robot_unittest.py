@@ -13,14 +13,15 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.robot_name = 'The first robot'
         self.robot = Robot(self.robot_name)
         self.x_initial, self.y_initial = 0,0
-        self.robot.setPosition(self.x_initial, self.y_initial)
-        self.face_initial = Face.EAST
-        self.robot.setFaceDirection(self.face_initial)
         # fabricate a table of dimensions 5 units x 5 units and pass it to the robot
         self.x_dimension_table = 5
         self.y_dimension_table = 5
         self.test_table_one = Table("table one", self.x_dimension_table, self.y_dimension_table)
         self.robot.setTable(self.test_table_one)
+        self.robot.setPosition(self.x_initial, self.y_initial)
+        self.face_initial = Face.EAST
+        self.robot.setFaceDirection(self.face_initial)
+        
         
 
     def test_name(self):
@@ -203,27 +204,35 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         setPosition[x_ and y] of robot cannot be negative, it must not be larger than the table x_dimension and y_dimension too
         if an invalid input is given, application should not set the position of x_ and y, i.e. set them to None, and then hope that in future a valid input is given        
         """
-
+        t = Table("a 5x5table", 5, 5)
+        self.robot = Robot('First robot')
+        self.robot.setTable(t)        
         self.robot.setPosition(0, 0)
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((0,0),(x_current , y_current))
         
         self.robot = Robot('Second robot')
+        self.robot.setTable(t)        
         self.robot.setPosition(-5, -5)        
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((None,None),(x_current , y_current))
 
         self.robot = Robot('Third robot')
+        self.robot.setTable(t)
         self.robot.setPosition(0, -5)        
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((0,None),(x_current , y_current))
 
         self.robot = Robot('Furth robot')
+        self.robot.setTable(t)
         self.robot.setPosition(-4, 0)        
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((None,0),(x_current , y_current))
 
+        
+
         self.robot = Robot('Fifth robot')   #check if position of robot is more than the table size
+        self.robot.setTable(t)        
         self.robot.setPosition(6, 6)        
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((None,None),(x_current , y_current))

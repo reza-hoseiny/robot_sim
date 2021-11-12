@@ -13,10 +13,13 @@ class Robot:
         return self.name
 
     def setPosition(self, x, y):
-        if x>=0:
-            self.current_x = x
-        if y>=0:
-            self.current_y = y
+        x_table_dim, y_table_dim = self.table.getDimensions()
+        if x_table_dim is not None:
+            if x>=0 and x <= x_table_dim:
+                self.current_x = x
+        if y_table_dim is not None:
+            if y>=0 and y <= y_table_dim:
+                self.current_y = y
 
     def getCurrentPosition(self):
         return (self.current_x, self.current_y)
