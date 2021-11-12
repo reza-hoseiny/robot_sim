@@ -10,10 +10,16 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
     def setUp(self):
         self.robot_name = 'The first robot'
         self.robot = Robot(self.robot_name)
+        self.x_initial, self.y_initial = 0,0
 
 
-    def test_report(self):
+    def test_name(self):
         self.assertEqual(self.robot.getName(), self.robot_name)
+    
+    def test_position(self):
+        self.robot.setPosition(self.x_initial, self.y_initial)
+        self.assertEqual(self.robot.getCurrentPosition(), (self.x_initial, self.y_initial))
+
 
 if __name__ == '__main__':
     unittest.main()
