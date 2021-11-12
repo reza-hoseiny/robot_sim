@@ -26,6 +26,10 @@ class ContextManager():
                 self.robot.setFaceDirection(command.face_direction)
         elif ctype == CommandType.MOVE:
             self.robot.move()
+        elif ctype == CommandType.LEFT:
+            self.robot.left()
+        elif ctype == CommandType.RIGHT:
+            self.robot.right()
 
 
                 
