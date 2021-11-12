@@ -68,10 +68,6 @@ class ContextManager():
         return result
                         
         
-        
-
-
-
     def getTable(self):
         return self.table
     
