@@ -96,13 +96,13 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         face_current_after_command = self.robot.getCurrentFaceDirection()
         face_correct_after_left = None
         if face_current == Face.NORTH:
-            face_correct_after_left = Face.EAST
-        elif face_current == Face.SOUTH:
             face_correct_after_left = Face.WEST
+        elif face_current == Face.SOUTH:
+            face_correct_after_left = Face.EAST
         elif face_current == Face.EAST:
-            face_correct_after_left = Face.SOUTH
-        elif face_current == Face.WEST:
             face_correct_after_left = Face.NORTH
+        elif face_current == Face.WEST:
+            face_correct_after_left = Face.SOUTH
         self.assertEqual((x_current_after_command, y_current_after_command, face_current_after_command), (x_current, y_current, face_correct_after_left))
         
 
@@ -116,13 +116,13 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         x_current_after_command, y_current_after_command = self.robot.getCurrentPosition()
         face_current_after_command = self.robot.getCurrentFaceDirection()
         if face_current == Face.NORTH:
-            face_correct_after_right = Face.WEST
-        elif face_current == Face.SOUTH:
             face_correct_after_right = Face.EAST
+        elif face_current == Face.SOUTH:
+            face_correct_after_right = Face.WEST
         elif face_current == Face.EAST:
-            face_correct_after_right = Face.NORTH
-        elif face_current == Face.WEST:
             face_correct_after_right = Face.SOUTH
+        elif face_current == Face.WEST:
+            face_correct_after_right = Face.NORTH
         self.assertEqual((x_current_after_command, y_current_after_command, face_current_after_command), (x_current, y_current, face_correct_after_right))
         
     def test_case_one(self):

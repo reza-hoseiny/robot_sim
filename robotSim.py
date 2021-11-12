@@ -78,13 +78,13 @@ class Robot:
         """
         face_current = self.getCurrentFaceDirection()
         if face_current == Face.NORTH:
-            self.face_direction = Face.EAST
-        elif face_current == Face.SOUTH:
             self.face_direction = Face.WEST
+        elif face_current == Face.SOUTH:
+            self.face_direction = Face.EAST
         elif face_current == Face.EAST:
-            self.face_direction = Face.SOUTH
-        elif face_current == Face.WEST:
             self.face_direction = Face.NORTH
+        elif face_current == Face.WEST:
+            self.face_direction = Face.SOUTH
 
     def right(self):
         """
@@ -92,12 +92,12 @@ class Robot:
         """
         face_current = self.getCurrentFaceDirection()
         if face_current == Face.NORTH:
-            self.face_direction = Face.WEST
-        elif face_current == Face.SOUTH:
             self.face_direction = Face.EAST
+        elif face_current == Face.SOUTH:
+            self.face_direction = Face.WEST
         elif face_current == Face.EAST:
-            self.face_direction = Face.NORTH
-        elif face_current == Face.WEST:
             self.face_direction = Face.SOUTH
+        elif face_current == Face.WEST:
+            self.face_direction = Face.NORTH
 
 
