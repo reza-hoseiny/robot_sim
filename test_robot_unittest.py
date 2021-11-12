@@ -3,6 +3,8 @@ import unittest                 #Import unittest from the standard library of py
 from robot import Robot
 from face import Face
 from table import Table
+from command import Command
+from commandType import CommandType
 
 class TestRobotMethods(unittest.TestCase):  #every test class must inherit from the TestCase class
     """
@@ -22,8 +24,6 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.face_initial = Face.EAST
         self.robot.setFaceDirection(self.face_initial)
         
-        
-
     def test_name(self):
         self.assertEqual(self.robot.getName(), self.robot_name)
     
@@ -340,5 +340,17 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         x_report, y_report, face_report = self.robot.report()
         self.assertEqual((4, 4, Face.EAST), (x_report, y_report, face_report))
 
+class TestCommandMethods(unittest.TestCase):  #the test class to check the validaity of input commands
+    def setUp(self):
+        self.command = Command(CommandType.PLACE)
+    
+    def test_command_type_place(self):
+        ctype = self.command.getCommandType()
+        self.assertEqual(ctype, CommandType.PLACE)
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
+
