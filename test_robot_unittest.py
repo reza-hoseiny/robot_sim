@@ -197,5 +197,33 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         with self.assertRaises(ValueError):
             test_table_invalid = Table("name of a invalid table", 0, 1)
 
+    def test_edge_case_initial_robot_position(self):
+        """
+        edge case input for robot x&y initial positions:
+        setPosition[x_ and y] of robot cannot be negative, it must not be larger than the table x_dimension and y_dimension too
+        if an invalid input is given, application should not set the position of x_ and y, i.e. set them to None, and then hope that in future a valid input is given        
+        """
+
+        self.robot.setPosition(0, 0)
+        x_current , y_current = self.robot.getCurrentPosition()
+        self.assertEqual((0,0),(x_current , y_current))
+        
+        self.robot = Robot('Second robot')
+        self.robot.setPosition(-5, -5)        
+        x_current , y_current = self.robot.getCurrentPosition()
+        self.assertEqual((None,None),(x_current , y_current))
+
+        self.robot = Robot('Third robot')
+        self.robot.setPosition(0, -5)        
+        x_current , y_current = self.robot.getCurrentPosition()
+        self.assertEqual((0,None),(x_current , y_current))
+
+        self.robot = Robot('Furth robot')
+        self.robot.setPosition(-4, 0)        
+        x_current , y_current = self.robot.getCurrentPosition()
+        self.assertEqual((None,0),(x_current , y_current))
+
+
+
 if __name__ == '__main__':
     unittest.main()
