@@ -3,7 +3,7 @@ import unittest                 #Import unittest from the standard library of py
 from robot import Robot
 from face import Face
 from table import Table
-from command import Command, PlaceCommand
+from command import *
 from commandType import CommandType
 
 class TestRobotMethods(unittest.TestCase):  #every test class must inherit from the TestCase class
