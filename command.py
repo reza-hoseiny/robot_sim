@@ -40,6 +40,6 @@ class RightCommand(Command):
     def __init__(self):
         self.commandType = CommandType.RIGHT
 
-class RerportCommand(Command):
+class ReportCommand(Command):
     def __init__(self):
         self.commandType = CommandType.REPORT

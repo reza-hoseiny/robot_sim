@@ -391,13 +391,13 @@ class TestCommandMethods(unittest.TestCase):  #the test class to check the valid
         self.assertEqual(ctype, CommandType.RIGHT)
     
     def test_command_report(self):
-        self.command = RerportCommand()
+        self.command = ReportCommand()
         ctype = self.command.getCommandType()
         self.assertEqual(ctype, CommandType.REPORT)
 
 class TestContextMethods(unittest.TestCase):  #the test class to check the validaity of input commands
     def setUp(self):        
-        self.contextManager = ContextManager(Table("a Table", 5, 5), Robot("a Robot"))
+        self.contextManager = ContextManager(Table("a Table", 5, 5), Robot("a Robot"),"commands.txt")
         
     def test_table_is_assigned_robot(self):
         t = self.contextManager.getTable()
@@ -475,29 +475,37 @@ class TestContextMethods(unittest.TestCase):  #the test class to check the valid
         self.contextManager.issue(MoveCommand())
         self.contextManager.issue(MoveCommand())
         self.contextManager.issue(MoveCommand())
-        result = self.contextManager.issue(RerportCommand())
+        result = self.contextManager.issue(ReportCommand())
         self.assertEqual((3, 2,Face.EAST), result)
         self.contextManager.issue(RightCommand())        
         self.contextManager.issue(MoveCommand())
         self.contextManager.issue(MoveCommand())
         self.contextManager.issue(MoveCommand())
-        result = self.contextManager.issue(RerportCommand())
+        result = self.contextManager.issue(ReportCommand())
         self.assertEqual((3, 0,Face.SOUTH), result)
 
     def test_issue_right_after_invalid_place_command(self):
         self.contextManager.issue(PlaceCommand(-4,-8,Face.EAST))
-        result = self.contextManager.issue(RerportCommand())        
+        result = self.contextManager.issue(ReportCommand())        
         self.assertEqual((None, None,None), result)
         self.contextManager.issue(MoveCommand())
-        result = self.contextManager.issue(RerportCommand())        
+        result = self.contextManager.issue(ReportCommand())        
         self.assertEqual((None, None,None), result)      
         self.contextManager.issue(RightCommand())  
-        result = self.contextManager.issue(RerportCommand())        
+        result = self.contextManager.issue(ReportCommand())        
         self.assertEqual((None, None,None), result)
         self.contextManager.issue(LeftCommand())        
-        result = self.contextManager.issue(RerportCommand())        
+        result = self.contextManager.issue(ReportCommand())        
         self.assertEqual((None, None,None), result)      
+
+    def test_read_commands_from_input_file(self):
+        self.assertEqual(self.contextManager.input_file_name, "commands.txt")
+        result = self.contextManager.execute_commands()
+        self.assertEqual(result, (2, 3,Face.NORTH))
+
         
+
+
 if __name__ == '__main__':
     unittest.main()
 
