@@ -17,6 +17,7 @@ class ContextManager():
         return self.robot
 
     def issue(self,command):
+        result = None
         ctype = command.getCommandType() 
         if ctype == CommandType.PLACE:
             (x_max, y_max) = self.table.getDimensions()
@@ -30,7 +31,9 @@ class ContextManager():
             self.robot.left()
         elif ctype == CommandType.RIGHT:
             self.robot.right()
-
+        elif ctype == CommandType.REPORT:
+            result = self.robot.report()
+        return result
 
                 
                 

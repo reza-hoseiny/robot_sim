@@ -467,8 +467,28 @@ class TestContextMethods(unittest.TestCase):  #the test class to check the valid
         r = self.contextManager.getRobot()
         self.assertEqual(r.getCurrentPosition(), (3, 0))
 
+    def test_issue_report_command(self):
+        self.contextManager.issue(PlaceCommand(0,0,Face.NORTH))
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(RightCommand())        
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        result = self.contextManager.issue(RerportCommand())
+        self.assertEqual((3, 2,Face.EAST), result)
+        self.contextManager.issue(RightCommand())        
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        result = self.contextManager.issue(RerportCommand())
+        self.assertEqual((3, 0,Face.SOUTH), result)
+
+
+        
 
 if __name__ == '__main__':
     unittest.main()
+
 
 
