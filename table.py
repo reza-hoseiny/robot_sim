@@ -7,8 +7,6 @@ class Table():
         else:
             raise ValueError("the given x or y dimension of table is not positive")
 
-
-
     def getTableName(self):
         return self.name   
 

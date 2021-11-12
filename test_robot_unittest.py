@@ -185,8 +185,18 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         with self.assertRaises(ValueError):
             test_table_invalid = Table("name of a invalid table", 0, 0)
             self.robot.setTable(test_table_invalid)
+        
+        with self.assertRaises(ValueError):
+            test_table_invalid = Table("name of a invalid table", -1, 5)
+        
+        with self.assertRaises(ValueError):
+            test_table_invalid = Table("name of a invalid table", 1, -5)
+        
+        with self.assertRaises(ValueError):
+            test_table_invalid = Table("name of a invalid table", 1, 0)
 
-
+        with self.assertRaises(ValueError):
+            test_table_invalid = Table("name of a invalid table", 0, 1)
 
 if __name__ == '__main__':
     unittest.main()
