@@ -6,6 +6,7 @@ class Robot:
         self.current_x = None
         self.current_y = None
         self.table= None
+        self.face_direction= None
         pass
 
     def getName(self):

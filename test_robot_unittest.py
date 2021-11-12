@@ -35,8 +35,32 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.assertEqual(self.robot.getTable().getTableName(), "table one")
 
     def test_get_table_dimensions(self):
-        (x,y) = self.robot.getTableDimensions()
-        self.assertEqual((x,y), (self.x_dimension_table, self.y_dimension_table))
+        (x_dim,y_dim) = self.robot.getTableDimensions()
+        self.assertEqual((x_dim,y_dim), (self.x_dimension_table, self.y_dimension_table))
+
+    def test_move(self): 
+        """
+        test the move function of the toy robot to see if it moves just one unit forward in the direction it is currently facing.
+        """
+        x_current, y_current = self.robot.getCurrentPosition()
+        face_current = self.robot.getCurrentFaceDirection()
+        self.robot.move()
+        x_after_move , y_after_move = self.robot.getCurrentPosition()
+        if face_current==Face.NORTH:
+            self.assertEqual((x_after_move , y_after_move), (x_current, y_current+1))
+        elif face_current==Face.SOUTH:
+            self.assertEqual((x_after_move , y_after_move), (x_current, y_current-1))
+        elif face_current==Face.EAST:
+            self.assertEqual((x_after_move , y_after_move), (x_current+1, y_current))
+        elif face_current==Face.WEST:
+            self.assertEqual((x_after_move , y_after_move), (x_current-1, y_current))
+        # TODO : check agianst the table dimension to see if the robot does not fall off of the table with regard to the table dimensions
+
+        
+
+
+
+
 
 
 
