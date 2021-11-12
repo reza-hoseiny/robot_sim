@@ -404,6 +404,13 @@ class TestContextMethods(unittest.TestCase):  #the test class to check the valid
         r = self.contextManager.getRobot()
         self.assertEqual(r.getTable(), t)
 
+    def test_issue_command(self):
+        self.contextManager.issue(PlaceCommand(2,4,Face.EAST))
+        r = self.contextManager.getRobot()
+        self.assertEqual(r.getCurrentPosition(), (2,4))
+
+
+
 if __name__ == '__main__':
     unittest.main()
 
