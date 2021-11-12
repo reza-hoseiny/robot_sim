@@ -139,6 +139,20 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         x_report, y_report, face_report = self.robot.report()
         self.assertEqual((0, 1, Face.NORTH), (x_report, y_report, face_report))
 
+    def test_case_two(self):
+        """
+        a simple test case for the following command series:
+        PLACE 0,0,NORTH
+        LEFT
+        REPORT
+        the expected Output is 0,0,WEST
+        """
+        self.robot.setPosition(0,0)
+        self.robot.setFaceDirection(Face.NORTH)
+        self.robot.left()
+        x_report, y_report, face_report = self.robot.report()
+        self.assertEqual((0, 0, Face.WEST), (x_report, y_report, face_report))
+
 
 
 
