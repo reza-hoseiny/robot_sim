@@ -223,6 +223,11 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         x_current , y_current = self.robot.getCurrentPosition()
         self.assertEqual((None,0),(x_current , y_current))
 
+        self.robot = Robot('Fifth robot')
+        self.robot.setPosition(6, 6)        
+        x_current , y_current = self.robot.getCurrentPosition()
+        self.assertEqual((None,None),(x_current , y_current))
+
 
 
 if __name__ == '__main__':
