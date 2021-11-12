@@ -5,6 +5,7 @@ class Robot:
         self.name= name
         self.current_x = None
         self.current_y = None
+        self.table= None
         pass
 
     def getName(self):
@@ -31,3 +32,13 @@ class Robot:
 
     def setTable(self, table):
         self.table = table
+
+    def getTable(self):
+        return self.table
+
+    def getTableDimensions(self):
+        if self.table is not None:
+            dim = self.table.getDimensions()
+            return dim
+        else:
+            return None
