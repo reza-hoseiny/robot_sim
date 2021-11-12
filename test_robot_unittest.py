@@ -104,15 +104,27 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         elif face_current == Face.WEST:
             face_correct_after_left = Face.NORTH
         self.assertEqual((x_current_after_command, y_current_after_command, face_current_after_command), (x_current, y_current, face_correct_after_left))
-
-
-
-
-
         
 
     def test_right(self):
-        pass
+        """
+        RIGHT command should rotate the robot 90 degrees in the RIGHT direction without changing the position of the robot
+        """
+        x_current, y_current = self.robot.getCurrentPosition()
+        face_current = self.robot.getCurrentFaceDirection()
+        self.robot.right()
+        x_current_after_command, y_current_after_command = self.robot.getCurrentPosition()
+        face_current_after_command = self.robot.getCurrentFaceDirection()
+        if face_current == Face.NORTH:
+            face_correct_after_right = Face.WEST
+        elif face_current == Face.SOUTH:
+            face_correct_after_right = Face.EAST
+        elif face_current == Face.EAST:
+            face_correct_after_right = Face.NORTH
+        elif face_current == Face.WEST:
+            face_correct_after_right = Face.SOUTH
+        self.assertEqual((x_current_after_command, y_current_after_command, face_current_after_command), (x_current, y_current, face_correct_after_right))
+        
 
 
 

@@ -72,6 +72,20 @@ class Robot:
         face_current = self.getCurrentFaceDirection()
         return (x_current, y_current,face_current)
 
+    def left(self):
+        """
+        LEFT command forces the robot to rotate 90 degrees in the left direction without changing the position of the robot
+        """
+        face_current = self.getCurrentFaceDirection()
+        if face_current == Face.NORTH:
+            self.face_direction = Face.EAST
+        elif face_current == Face.SOUTH:
+            self.face_direction = Face.WEST
+        elif face_current == Face.EAST:
+            self.face_direction = Face.SOUTH
+        elif face_current == Face.WEST:
+            self.face_direction = Face.NORTH
+
 
 
 
