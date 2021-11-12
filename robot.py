@@ -7,7 +7,6 @@ class Robot:
         self.current_y = None
         self.table= None
         self.face_direction= None
-        pass
 
     def getName(self):
         return self.name
@@ -29,7 +28,6 @@ class Robot:
             self.face_direction = face_direction
         else:
             raise ValueError("the given face direction must be a valid value of Face enum")
-        pass
 
     def getCurrentFaceDirection(self):
         return self.face_direction

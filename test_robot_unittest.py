@@ -282,5 +282,63 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         x_report, y_report, face_report = self.robot.report()
         self.assertEqual((0, 1, Face.SOUTH), (x_report, y_report, face_report))
 
+    def test_case_five(self):
+        """
+        a complex test case for the following command series:
+        PLACE 1,0,EAST
+        MOVE
+        MOVE
+        MOVE
+        MOVE    
+                (4,0,EAST)
+        RIGHT
+        MOVE    
+                (4,0,SOUTH)
+        RIGHT
+        MOVE    
+                (3,0,WEST)
+        RIGHT
+        MOVE    (3,1,NORTH)
+        MOVE    (3,2)
+        MOVE    (3,3)
+        MOVE    (3,4)
+        MOVE    (3,4)
+        MOVE    (3,4)
+        RIGHT   
+        MOVE    
+                (4,4)        
+        MOVE    
+        MOVE    
+        REPORT
+        the expected Output is (4,4,EAST)
+        """
+        self.robot.setPosition(1,0)
+        self.robot.setFaceDirection(Face.EAST)
+        self.assertEqual((1, 0, Face.EAST), self.robot.report())
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.assertEqual((4, 0, Face.EAST), self.robot.report())
+        self.robot.right()
+        self.robot.move()
+        self.assertEqual((4, 0, Face.SOUTH), self.robot.report())
+        self.robot.right()
+        self.robot.move()
+        self.assertEqual((3, 0, Face.WEST), self.robot.report())
+        self.robot.right()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.move()
+        self.robot.right()
+        self.robot.move()        
+        self.robot.move()    
+        self.robot.move()    
+        x_report, y_report, face_report = self.robot.report()
+        self.assertEqual((4, 4, Face.EAST), (x_report, y_report, face_report))
+
 if __name__ == '__main__':
     unittest.main()
