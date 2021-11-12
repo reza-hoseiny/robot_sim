@@ -2,6 +2,7 @@
 import unittest                 #Import unittest from the standard library of python
 from robotSim import Robot
 from face import Face
+from table import Table
 
 class TestRobotMethods(unittest.TestCase):  #every test class must inherit from the TestCase class
     """
@@ -13,7 +14,10 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.robot = Robot(self.robot_name)
         self.x_initial, self.y_initial = 0,0
         self.face_initial = Face.EAST
-
+        
+        x_dimension = 5
+        y_dimension = 5
+        self.test_table_one = Table("table one", x_dimension, y_dimension)
 
     def test_name(self):
         self.assertEqual(self.robot.getName(), self.robot_name)
@@ -26,7 +30,8 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.robot.setFaceDirection(self.face_initial)
         self.assertEqual(self.robot.getCurrentFaceDirection(), self.face_initial)
 
-
+    def test_set_table(self):
+        self.robot.setTable(self.test_table_one)
 
 
 if __name__ == '__main__':

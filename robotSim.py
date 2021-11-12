@@ -7,8 +7,6 @@ class Robot:
         self.current_y = None
         pass
 
-    
-
     def getName(self):
         return self.name
 
@@ -30,3 +28,6 @@ class Robot:
 
     def getCurrentFaceDirection(self):
         return self.face_direction
+
+    def setTable(self, table):
+        self.table = table
