@@ -3,7 +3,7 @@ import unittest                 #Import unittest from the standard library of py
 from robot import Robot
 from face import Face
 from table import Table
-from command import Command
+from command import Command, PlaceCommand
 from commandType import CommandType
 
 class TestRobotMethods(unittest.TestCase):  #every test class must inherit from the TestCase class
@@ -342,7 +342,7 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
 
 class TestCommandMethods(unittest.TestCase):  #the test class to check the validaity of input commands
     def setUp(self):
-        self.command = Command(CommandType.PLACE)
+        self.command = PlaceCommand(0,0,Face.EAST)
     
     def test_command_type_place(self):
         ctype = self.command.getCommandType()
