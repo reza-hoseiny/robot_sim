@@ -27,7 +27,6 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.assertEqual(self.robot.getName(), self.robot_name)
     
     def test_position(self):
-
         self.assertEqual(self.robot.getCurrentPosition(), (self.x_initial, self.y_initial))
 
     def test_face(self):
@@ -72,6 +71,17 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         else:
             self.assertRaises(ValueError, None) # the code must raise ValueError("the given face direction is not a valid value from Face enum")
         
+    def test_report(self): 
+        """
+        REPORT function should announce the X,Y coordicnate and the orientation of the robot.
+        """
+        x_current, y_current = self.robot.getCurrentPosition()
+        face_current = self.robot.getCurrentFaceDirection()
+        x_report, y_report, face_report = self.robot.report()
+        self.assertEqual((self.x_initial, self.y_initial, self.face_initial), (x_report, y_report, face_report))
+        self.assertEqual((x_current, y_current, face_current), (x_report, y_report, face_report))
+
+
 
         
 
