@@ -174,19 +174,17 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
         self.assertEqual((3, 3, Face.NORTH), (x_report, y_report, face_report))
 
 
-
-
-
-
-
-
-
+    def test_edge_case_table(self):
+        """
+        edge case input for table x&y dimension:
+        x_dimension and y_dimension of table cannot be negative or equal to zero
+        if an invalid input is given, application should raise an error and stops the program
+        """
         
-
-
-
-
-
+        # check that Table and setTable fails when the table x_dimension and y_dimension are negative or equal to zero
+        with self.assertRaises(ValueError):
+            test_table_invalid = Table("name of a invalid table", 0, 0)
+            self.robot.setTable(test_table_invalid)
 
 
 
