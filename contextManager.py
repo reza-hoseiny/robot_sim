@@ -23,6 +23,11 @@ class ContextManager():
             command.set_x_y_valid_boundaries(0,0,x_max,y_max)
             if command.is_valid():
                 self.robot.setPosition(command.x_position, command.y_position)
+                self.robot.setFaceDirection(command.face_direction)
+        elif ctype == CommandType.MOVE:
+            self.robot.move()
+
+
                 
                 
 

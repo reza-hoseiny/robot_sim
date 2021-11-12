@@ -432,7 +432,13 @@ class TestContextMethods(unittest.TestCase):  #the test class to check the valid
         self.contextManager.issue(MoveCommand())
         self.contextManager.issue(MoveCommand())
         r = self.contextManager.getRobot()
-        self.assertEqual(r.getCurrentPosition(), (2, 0))
+        self.assertEqual(r.getCurrentPosition(), (0, 2))
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        self.contextManager.issue(MoveCommand())
+        r = self.contextManager.getRobot()
+        self.assertEqual(r.getCurrentPosition(), (0, 4))
 
 
 
