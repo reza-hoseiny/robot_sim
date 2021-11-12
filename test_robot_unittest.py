@@ -342,14 +342,33 @@ class TestRobotMethods(unittest.TestCase):  #every test class must inherit from 
 
 class TestCommandMethods(unittest.TestCase):  #the test class to check the validaity of input commands
     def setUp(self):
-        self.command = PlaceCommand(0,0,Face.EAST)
+        pass
+        
     
     def test_command_type_place(self):
+        self.command = PlaceCommand(0,0,Face.EAST)
         ctype = self.command.getCommandType()
         self.assertEqual(ctype, CommandType.PLACE)
 
+    def test_command_move(self):
+        self.command = MoveCommand()
+        ctype = self.command.getCommandType()
+        self.assertEqual(ctype, CommandType.MOVE)
 
-
+    def test_command_left(self):
+        self.command = LeftCommand()
+        ctype = self.command.getCommandType()
+        self.assertEqual(ctype, CommandType.LEFT)
+    
+    def test_command_right(self):
+        self.command = RightCommand()
+        ctype = self.command.getCommandType()
+        self.assertEqual(ctype, CommandType.RIGHT)
+    
+    def test_command_report(self):
+        self.command = RerportCommand()
+        ctype = self.command.getCommandType()
+        self.assertEqual(ctype, CommandType.REPORT)
 
 if __name__ == '__main__':
     unittest.main()
