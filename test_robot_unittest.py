@@ -350,6 +350,15 @@ class TestCommandMethods(unittest.TestCase):  #the test class to check the valid
         ctype = self.command.getCommandType()
         self.assertEqual(ctype, CommandType.PLACE)
 
+    def test_place_command_is_valid(self):
+        """
+        a PLACE X,Y,F command is only valid (so must be executed) if the initial x_position is in range of 0 and table x dim, same rule is applicable for the y value
+        """
+        self.command = PlaceCommand(1,1,Face.EAST)
+        self.command.set_x_y_valid_boundaries(0,0,5,5) # a table of 5x5
+        self.assertEqual(self.command.is_valid(), True)
+
+
     def test_command_move(self):
         self.command = MoveCommand()
         ctype = self.command.getCommandType()
