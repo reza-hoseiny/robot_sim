@@ -359,6 +359,22 @@ class TestCommandMethods(unittest.TestCase):  #the test class to check the valid
         self.assertEqual(self.command.is_valid(), True)
 
 
+        self.command = PlaceCommand(-1,1,Face.EAST)
+        self.command.set_x_y_valid_boundaries(0,0,5,5) # a table of 5x5
+        self.assertEqual(self.command.is_valid(), False)
+
+        self.command = PlaceCommand(+1,-1,Face.EAST)
+        self.command.set_x_y_valid_boundaries(0,0,5,5) # a table of 5x5
+        self.assertEqual(self.command.is_valid(), False)
+
+        self.command = PlaceCommand(+15,3,Face.EAST)
+        self.command.set_x_y_valid_boundaries(0,0,5,5) # a table of 5x5
+        self.assertEqual(self.command.is_valid(), False)
+
+        self.command = PlaceCommand(+3,44,Face.EAST)
+        self.command.set_x_y_valid_boundaries(0,0,5,5) # a table of 5x5
+        self.assertEqual(self.command.is_valid(), False)
+
     def test_command_move(self):
         self.command = MoveCommand()
         ctype = self.command.getCommandType()
