@@ -4,6 +4,8 @@ class Board():
         self.right_boundary = rb
         self.top_boundary = tb
         self.bottom_boundary = bb
+        self.occupied_positions = []
+
     
     def within_boundaries(self, position):
         x_coord, y_coord = position.coordinates()
@@ -12,7 +14,13 @@ class Board():
                 return True 
         return False
 
-
-
+    def occupy(self,position):
+      self.occupied_positions.append(position)
+    
+    def space_empty(self, position):
+        if self.occupied_positions.include(position):
+          return False
+        return True
+    
 
 
